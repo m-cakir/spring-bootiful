@@ -1,15 +1,25 @@
 package com.bootiful.config;
 
+import com.bootiful.web.converter.StringToUserConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.context.request.RequestContextListener;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.util.List;
+
 @Configuration
 public class WebConfigurer extends WebMvcConfigurerAdapter {
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(pageableHandlerMethodArgumentResolver());
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -18,7 +28,7 @@ public class WebConfigurer extends WebMvcConfigurerAdapter {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        super.addFormatters(registry);
+        registry.addConverter(getStringToUserConverter());
     }
 
     @Override
@@ -31,6 +41,16 @@ public class WebConfigurer extends WebMvcConfigurerAdapter {
     @Bean
     public RequestContextListener requestContextListener(){
         return new RequestContextListener();
+    }
+
+    @Bean
+    public PageableHandlerMethodArgumentResolver pageableHandlerMethodArgumentResolver(){
+        return new PageableHandlerMethodArgumentResolver();
+    }
+
+    @Bean
+    public StringToUserConverter getStringToUserConverter(){
+        return new StringToUserConverter();
     }
 
 }
