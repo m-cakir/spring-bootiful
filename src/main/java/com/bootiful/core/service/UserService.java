@@ -1,7 +1,7 @@
-package com.bootiful.service;
+package com.bootiful.core.service;
 
-import com.bootiful.model.User;
-import com.bootiful.repository.UserRepository;
+import com.bootiful.core.model.User;
+import com.bootiful.core.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

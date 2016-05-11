@@ -1,4 +1,4 @@
-package com.bootiful.model;
+package com.bootiful.core.model;
 
 import javax.persistence.Entity;
 

@@ -1,4 +1,4 @@
-package com.bootiful.controller;
+package com.bootiful.web.controller;
 
 import org.springframework.stereotype.Controller;
 

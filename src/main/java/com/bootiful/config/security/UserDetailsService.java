@@ -1,8 +1,8 @@
-package com.bootiful.security;
+package com.bootiful.config.security;
 
-import com.bootiful.model.Role;
-import com.bootiful.model.User;
-import com.bootiful.repository.UserRepository;
+import com.bootiful.core.model.Role;
+import com.bootiful.core.model.User;
+import com.bootiful.core.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

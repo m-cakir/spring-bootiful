@@ -1,6 +1,6 @@
-package com.bootiful.service;
+package com.bootiful.core.service;
 
-import com.bootiful.model.User;
+import com.bootiful.core.model.User;
 
 public interface IUserService {
 

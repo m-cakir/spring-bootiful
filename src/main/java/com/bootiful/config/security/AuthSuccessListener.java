@@ -1,7 +1,7 @@
-package com.bootiful.security;
+package com.bootiful.config.security;
 
-import com.bootiful.model.User;
-import com.bootiful.service.IUserService;
+import com.bootiful.core.model.User;
+import com.bootiful.core.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;

@@ -24,7 +24,7 @@ public class LoggingAspect {
     @Inject
     private Environment env;
 
-    @Pointcut("within(com.bootiful.repository..*) || within(com.bootiful.service..*)")
+    @Pointcut("within(com.bootiful.core.repository..*) || within(com.bootiful.core.service..*)")
     public void loggingPointcut() {
     }
 

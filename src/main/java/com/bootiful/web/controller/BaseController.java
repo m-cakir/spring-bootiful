@@ -1,7 +1,7 @@
-package com.bootiful.controller;
+package com.bootiful.web.controller;
 
-import com.bootiful.model.User;
-import com.bootiful.security.AuthSuccessListener;
+import com.bootiful.core.model.User;
+import com.bootiful.config.security.AuthSuccessListener;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
