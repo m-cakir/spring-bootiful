@@ -1,6 +1,7 @@
 package com.bootiful.config;
 
 import com.bootiful.web.converter.StringToUserConverter;
+import net.kaczmarzyk.spring.data.jpa.web.SpecificationArgumentResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
@@ -18,6 +19,7 @@ public class WebConfigurer extends WebMvcConfigurerAdapter {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(specificationArgumentResolver());
         argumentResolvers.add(pageableHandlerMethodArgumentResolver());
     }
 
@@ -46,6 +48,11 @@ public class WebConfigurer extends WebMvcConfigurerAdapter {
     @Bean
     public PageableHandlerMethodArgumentResolver pageableHandlerMethodArgumentResolver(){
         return new PageableHandlerMethodArgumentResolver();
+    }
+
+    @Bean
+    public SpecificationArgumentResolver specificationArgumentResolver(){
+        return new SpecificationArgumentResolver();
     }
 
     @Bean
