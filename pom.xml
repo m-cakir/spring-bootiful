@@ -9,6 +9,7 @@
 	<modules>
 		<module>framework</module>
 		<module>web</module>
+		<module>jax-ws</module>
 	</modules>
 	<packaging>pom</packaging>
 
@@ -46,19 +47,21 @@
 				<scope>import</scope>
 			</dependency>
 
-			<!-- APACHE CXF -->
+			<!-- APACHE CXF JAX-WS-->
 			<dependency>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-spring-boot-starter-jaxws</artifactId>
 				<version>${apache.cxf.version}</version>
 			</dependency>
 
+			<!-- SPRING MVC ROUTER -->
 			<dependency>
 				<groupId>org.resthub</groupId>
 				<artifactId>springmvc-router</artifactId>
 				<version>${springmvc-router.version}</version>
 			</dependency>
 
+			<!-- THYMELEAF EXTRAS TILES -->
 			<dependency>
 				<groupId>org.thymeleaf.extras</groupId>
 				<artifactId>thymeleaf-extras-tiles2</artifactId>
@@ -75,6 +78,7 @@
 				<version>${javax.servlet.version}</version>
 			</dependency>
 
+			<!-- SPEC ARGUMENT RESOLVER -->
 			<dependency>
 				<groupId>net.kaczmarzyk</groupId>
 				<artifactId>specification-arg-resolver</artifactId>

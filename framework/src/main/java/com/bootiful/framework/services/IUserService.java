@@ -2,10 +2,14 @@ package com.bootiful.framework.services;
 
 import com.bootiful.framework.models.User;
 
+import java.util.List;
+
 public interface IUserService {
 
-    public User findByUsername(String username );
+    List<User> findAll();
 
-    public void save(User user);
+    User findByUsername(String username );
+
+    void save(User user);
 
 }
