@@ -1,5 +1,6 @@
 package com.bootiful.ws;
 
+import com.bootiful.framework.annotation.Logging;
 import com.bootiful.framework.models.User;
 import com.bootiful.framework.services.UserService;
 import org.apache.commons.logging.Log;
@@ -17,6 +18,7 @@ public class BootifulWSImpl extends BaseEndpoint implements BootifulWS {
 
     protected final Log LOG = LogFactory.getLog(BootifulWSImpl.class);
 
+    @Logging(method = "USERS")
     public List<User> users() {
 
         return userService.findAll();
