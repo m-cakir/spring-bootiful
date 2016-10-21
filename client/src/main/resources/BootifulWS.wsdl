@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ws.bootiful.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="BootifulWSImplService" targetNamespace="http://ws.bootiful.com/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.bootiful.com/" elementFormDefault="unqualified" targetNamespace="http://ws.bootiful.com/" version="1.0">
+
+  <xs:element name="users" type="tns:users"/>
+
+  <xs:element name="usersResponse" type="tns:usersResponse"/>
+
+  <xs:complexType name="users">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="usersResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="user" type="tns:user"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="user">
+    <xs:complexContent>
+      <xs:extension base="tns:baseModel">
+        <xs:sequence>
+          <xs:element name="enabled" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="lastLoginDetails" type="xs:string"/>
+          <xs:element minOccurs="0" name="lastLoginTime" type="xs:dateTime"/>
+          <xs:element name="loginFailuresCount" type="xs:int"/>
+          <xs:element minOccurs="0" name="password" type="xs:string"/>
+          <xs:element minOccurs="0" name="role" type="tns:role"/>
+          <xs:element minOccurs="0" name="username" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="baseModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="createTime" type="xs:dateTime"/>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="updateTime" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="role">
+    <xs:complexContent>
+      <xs:extension base="tns:baseModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="users">
+    <wsdl:part element="tns:users" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="usersResponse">
+    <wsdl:part element="tns:usersResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="BootifulWS">
+    <wsdl:operation name="users">
+      <wsdl:input message="tns:users" name="users">
+    </wsdl:input>
+      <wsdl:output message="tns:usersResponse" name="usersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BootifulWSImplServiceSoapBinding" type="tns:BootifulWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="users">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="users">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="usersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BootifulWSImplService">
+    <wsdl:port binding="tns:BootifulWSImplServiceSoapBinding" name="BootifulWSImplPort">
+      <soap:address location="http://localhost:8080/Services/BootifulWS"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

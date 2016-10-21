@@ -10,6 +10,7 @@
 		<module>framework</module>
 		<module>web</module>
 		<module>jax-ws</module>
+		<module>client</module>
 	</modules>
 	<packaging>pom</packaging>
 
