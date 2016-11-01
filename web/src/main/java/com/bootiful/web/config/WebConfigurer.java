@@ -1,5 +1,6 @@
 package com.bootiful.web.config;
 
+import com.bootiful.framework.converters.StringToBaseModelConverterFactory;
 import com.bootiful.framework.converters.StringToUserConverter;
 import net.kaczmarzyk.spring.data.jpa.web.SpecificationArgumentResolver;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +31,8 @@ public class WebConfigurer extends WebMvcConfigurerAdapter {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(getStringToUserConverter());
+//        registry.addConverter(getStringToUserConverter());
+        registry.addConverterFactory(getBaseModelConverterFactory());
     }
 
     @Override
@@ -55,9 +57,14 @@ public class WebConfigurer extends WebMvcConfigurerAdapter {
         return new SpecificationArgumentResolver();
     }
 
+//    @Bean
+//    public StringToUserConverter getStringToUserConverter(){
+//        return new StringToUserConverter();
+//    }
+
     @Bean
-    public StringToUserConverter getStringToUserConverter(){
-        return new StringToUserConverter();
+    StringToBaseModelConverterFactory getBaseModelConverterFactory(){
+        return new StringToBaseModelConverterFactory();
     }
 
 }
