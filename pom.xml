@@ -19,7 +19,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
 		<apache.cxf.version>3.1.7</apache.cxf.version>
 		<springmvc-router.version>1.2.0</springmvc-router.version>
 		<thymeleaf-tiles.version>2.1.1.RELEASE</thymeleaf-tiles.version>
