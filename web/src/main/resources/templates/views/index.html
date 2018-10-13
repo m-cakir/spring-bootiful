@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{./layout/base}">
+<head lang="en">
+</head>
+<body>
+
+<th:block layout:fragment="content">
+
+    <h1>Wellcome <b th:text="${session.currentUser.username}"></b>!</h1>
+
+    <br/>
+
+    <form th:action="@{/logout}" method="post" th:if="${session.currentUser != null}">
+        <button type="submit" class="btn btn-info">logout</button>
+    </form>
+
+    <br/>
+
+    <p><a th:href="@{/users}" target="_blank">all users</a></p>
+    <p><a th:href="@{/users?username=spring}" target="_blank">list users by username like 'spring'</a></p>
+    <p><a th:href="@{/users?role=1}" target="_blank">list users has "admin" role</a></p>
+
+</th:block>
+
+</body>
+</html>

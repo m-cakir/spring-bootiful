@@ -1,56 +1,81 @@
 package com.bootiful.web.controller;
 
-import com.bootiful.framework.models.User;
-import com.bootiful.web.config.security.AuthSuccessListener;
-import org.springframework.util.StringUtils;
+import com.bootiful.framework.domain.User;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.net.InetAddress;
+import java.util.Enumeration;
+
+import static com.bootiful.web.util.SessionKey.CURRENT_USER;
 
 public abstract class BaseController {
-
-	private String viewBase = "";
-
-    protected BaseController() {
-    }
     
-    protected BaseController(String viewBase){
-		setViewBase(viewBase);
+    private String viewBase = "";
+
+    protected BaseController(String viewBase) {
+        this.viewBase = "views/" + viewBase + "/";
     }
-    
+
     protected String render(String viewName) {
         return viewBase + viewName;
     }
 
-	protected String forwardTo(String location){
-		if(location == null) {
-			location = "";
-		}
-		return "forward:/" + location;
-	}
+    protected String forwardTo(String location) {
+        return "forward:/" + (location != null ? location : "");
+    }
 
-	protected String redirectTo(String location){
-		if(location == null) {
-			location = "";
-		}
-		return "redirect:/" + location;
-	}
+    protected String redirectTo(String location) {
+        return "redirect:/" + (location != null ? location : "");
+    }
 
-	public void setViewBase(String viewBase){
-		if(!StringUtils.isEmpty(viewBase)){
-			viewBase = viewBase.trim();
-			if (viewBase.length() > 0){
-				this.viewBase = viewBase + "/";
-			}
-		}
-	}
+    @SuppressWarnings("unchecked")
+    protected String getMethodParameters(HttpServletRequest request) {
 
-	public String getViewBase() {
-		return viewBase;
-	}
+        StringBuilder result = new StringBuilder();
 
-	public static User getCurrentUser(HttpServletRequest request){
+        Enumeration<String> params = request.getParameterNames();
 
-		return (User) request.getSession().getAttribute(AuthSuccessListener.CURRENT_USER_KEY);
+        while (params.hasMoreElements()) {
+            String paramName = params.nextElement();
+            String value = paramName + ":" + request.getParameter(paramName) + " ";
+            result.append(value);
+        }
+        return result.toString();
+    }
 
-	}
+    protected String getClientIP(HttpServletRequest request) {
+        String remoteIp = request.getRemoteAddr();
+        String proxyIp = request.getHeader("X-Forwarded-For");
+        if (proxyIp.isEmpty())
+            return remoteIp;
+        else {
+            String forwardedIp = proxyIp;
+            String[] ipTokens = forwardedIp.split(",");
+            if (ipTokens != null && ipTokens.length > 1) forwardedIp = ipTokens[ipTokens.length - 2].trim();
+            return forwardedIp.isEmpty() ? remoteIp : forwardedIp;
+        }
+    }
+
+    protected String getServerIP() {
+        try {
+            return InetAddress.getLocalHost().getHostAddress();
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    protected User getCurrentUser(HttpServletRequest request) {
+        if (request == null) {
+            return null;
+        }
+        return getCurrentUser(request.getSession(true));
+    }
+
+    public static User getCurrentUser(HttpSession httpSession) {
+        if (httpSession == null) {
+            return null;
+        }
+        return (User) httpSession.getAttribute(CURRENT_USER);
+    }
 }

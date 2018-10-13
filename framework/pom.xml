@@ -31,6 +31,24 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+
+        <!-- Spring Data Jpa - Specification with Projections Support -->
+        <dependency>
+            <groupId>th.co.geniustree.springdata.jpa</groupId>
+            <artifactId>specification-with-projections</artifactId>
+        </dependency>
+
     </dependencies>
 
 

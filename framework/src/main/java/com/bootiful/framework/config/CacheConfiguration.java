@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
-@ConfigurationProperties("cache")
+//@Component
+//@ConfigurationProperties("cache")
 public class CacheConfiguration {
 
     Map<String, Long> expirations = new HashMap<String, Long>();

@@ -2,6 +2,7 @@ package com.bootiful.framework.utils;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Files;
@@ -73,7 +74,7 @@ public class FileSystemStorage {
             uploadPath.toFile().mkdirs();
         }
 
-        String outputFileName = StringUtil.isNothing(outputName)
+        String outputFileName = !StringUtils.hasText(outputName)
                 ? file.getOriginalFilename()
                 : (outputName + getExtension());
 

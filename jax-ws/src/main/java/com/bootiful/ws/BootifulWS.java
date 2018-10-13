@@ -1,6 +1,6 @@
 package com.bootiful.ws;
 
-import com.bootiful.framework.models.User;
+import com.bootiful.framework.domain.User;
 
 import javax.jws.WebMethod;
 import javax.jws.WebResult;

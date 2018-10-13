@@ -1,99 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.bootiful</groupId>
-	<artifactId>Bootiful</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<modules>
-		<module>framework</module>
-		<module>web</module>
-		<module>jax-ws</module>
-		<module>client</module>
-	</modules>
-	<packaging>pom</packaging>
+    <groupId>com.bootiful</groupId>
+    <artifactId>Bootiful</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <modules>
+        <module>framework</module>
+        <module>web</module>
+        <module>jax-ws</module>
+        <module>client</module>
+    </modules>
+    <packaging>pom</packaging>
 
-	<name>Bootiful</name>
-	<description>Spring Boot Project</description>
+    <name>Bootiful</name>
+    <description>Spring Boot Project</description>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
-		<apache.cxf.version>3.1.7</apache.cxf.version>
-		<springmvc-router.version>1.2.0</springmvc-router.version>
-		<thymeleaf-tiles.version>2.1.1.RELEASE</thymeleaf-tiles.version>
-		<javax.servlet.version>1.2</javax.servlet.version>
-	</properties>
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring-boot.version>2.0.5.RELEASE</spring-boot.version>
+        <apache.cxf.version>3.2.6</apache.cxf.version>
+        <springmvc-router.version>1.2.0</springmvc-router.version>
+        <!--<thymeleaf-tiles.version>2.1.1.RELEASE</thymeleaf-tiles.version>-->
+        <!--<javax.servlet.version>1.2</javax.servlet.version>-->
+        <thymeleaf-layout-dialect.version>2.3.0</thymeleaf-layout-dialect.version>
+        <specification-arg-resolver.version>1.1.1</specification-arg-resolver.version>
+        <specification-with-projections.version>2.0.0</specification-with-projections.version>
+    </properties>
 
-	<dependencyManagement>
+    <dependencyManagement>
 
-		<dependencies>
+        <dependencies>
 
-			<!-- BOOTIFUL FRAMEWORK -->
-			<dependency>
-				<groupId>com.bootiful</groupId>
-				<artifactId>framework</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
-				<type>jar</type>
-				<scope>compile</scope>
-			</dependency>
+            <!-- Bootiful Framework -->
+            <dependency>
+                <groupId>com.bootiful</groupId>
+                <artifactId>framework</artifactId>
+                <version>${project.version}</version>
+                <type>jar</type>
+                <scope>compile</scope>
+            </dependency>
 
-			<!-- SPRING BOOT -->
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-dependencies</artifactId>
-				<type>pom</type>
-				<version>1.4.0.RELEASE</version>
-				<scope>import</scope>
-			</dependency>
+            <!-- Spring Boot -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <type>pom</type>
+                <version>${spring-boot.version}</version>
+                <scope>import</scope>
+            </dependency>
 
-			<!-- APACHE CXF JAX-WS-->
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-spring-boot-starter-jaxws</artifactId>
-				<version>${apache.cxf.version}</version>
-			</dependency>
+            <!-- Apache CXF Jax-WS -->
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-spring-boot-starter-jaxws</artifactId>
+                <version>${apache.cxf.version}</version>
+            </dependency>
 
-			<!-- SPRING MVC ROUTER -->
-			<dependency>
-				<groupId>org.resthub</groupId>
-				<artifactId>springmvc-router</artifactId>
-				<version>${springmvc-router.version}</version>
-			</dependency>
+            <!-- Spring Mvc Router -->
+            <dependency>
+                <groupId>org.resthub</groupId>
+                <artifactId>springmvc-router</artifactId>
+                <version>${springmvc-router.version}</version>
+            </dependency>
 
-			<!-- THYMELEAF EXTRAS TILES -->
-			<dependency>
-				<groupId>org.thymeleaf.extras</groupId>
-				<artifactId>thymeleaf-extras-tiles2</artifactId>
-				<version>${thymeleaf-tiles.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.thymeleaf.extras</groupId>
-				<artifactId>thymeleaf-extras-tiles2-spring4</artifactId>
-				<version>${thymeleaf-tiles.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>jstl</artifactId>
-				<version>${javax.servlet.version}</version>
-			</dependency>
+            <!-- THYMELEAF EXTRAS TILES
+            removed cause: https://github.com/thymeleaf/thymeleaf-extras-tiles2/issues/24
+            -->
+            <!--<dependency>-->
+            <!--<groupId>org.thymeleaf.extras</groupId>-->
+            <!--<artifactId>thymeleaf-extras-tiles2</artifactId>-->
+            <!--<version>${thymeleaf-tiles.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+            <!--<groupId>org.thymeleaf.extras</groupId>-->
+            <!--<artifactId>thymeleaf-extras-tiles2-spring4</artifactId>-->
+            <!--<version>${thymeleaf-tiles.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+            <!--<groupId>javax.servlet</groupId>-->
+            <!--<artifactId>jstl</artifactId>-->
+            <!--<version>${javax.servlet.version}</version>-->
+            <!--</dependency>-->
 
-			<!-- SPEC ARGUMENT RESOLVER -->
-			<dependency>
-				<groupId>net.kaczmarzyk</groupId>
-				<artifactId>specification-arg-resolver</artifactId>
-				<version>0.9.0</version>
-				<exclusions>
-					<exclusion>
-						<artifactId>hibernate-jpa-2.0-api</artifactId>
-						<groupId>org.hibernate.javax.persistence</groupId>
-					</exclusion>
-				</exclusions>
-			</dependency>
+            <!-- Specification Argument Resolver -->
+            <dependency>
+                <groupId>net.kaczmarzyk</groupId>
+                <artifactId>specification-arg-resolver</artifactId>
+                <version>${specification-arg-resolver.version}</version>
+            </dependency>
 
-		</dependencies>
+            <!-- Spring Data Jpa - Specification with Projections Support -->
+            <!-- https://github.com/pramoth/specification-with-projection -->
+            <dependency>
+                <groupId>th.co.geniustree.springdata.jpa</groupId>
+                <artifactId>specification-with-projections</artifactId>
+                <version>${specification-with-projections.version}</version>
+            </dependency>
 
-	</dependencyManagement>
+            <!-- Thymeleaf Layout Dialect -->
+            <dependency>
+                <groupId>nz.net.ultraq.thymeleaf</groupId>
+                <artifactId>thymeleaf-layout-dialect</artifactId>
+                <version>${thymeleaf-layout-dialect.version}</version>
+            </dependency>
+
+        </dependencies>
+
+    </dependencyManagement>
 
 </project>

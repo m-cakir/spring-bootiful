@@ -1,8 +1,8 @@
 package com.bootiful.ws;
 
 import com.bootiful.framework.annotation.Logging;
-import com.bootiful.framework.models.User;
-import com.bootiful.framework.services.UserService;
+import com.bootiful.framework.domain.User;
+import com.bootiful.framework.service.UserService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;

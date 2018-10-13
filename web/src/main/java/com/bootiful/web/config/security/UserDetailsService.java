@@ -1,8 +1,8 @@
 package com.bootiful.web.config.security;
 
-import com.bootiful.framework.models.Role;
-import com.bootiful.framework.models.User;
-import com.bootiful.framework.repositories.UserRepository;
+import com.bootiful.framework.domain.Role;
+import com.bootiful.framework.domain.User;
+import com.bootiful.framework.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,17 +31,17 @@ public class UserDetailsService implements org.springframework.security.core.use
         String lowercaseUsername = username.toLowerCase();
 
         User user = userRepository.findByUsername(username);
-        if(user == null){
+        if (user == null) {
             throw new UsernameNotFoundException("User " + lowercaseUsername + " was not found");
         }
 
         Role role = user.getRole();
-        if(role == null){
+        if (role == null) {
             throw new UsernameNotFoundException("User " + lowercaseUsername + " was not found");
         }
 
         GrantedAuthority authority = new SimpleGrantedAuthority(role.getName());
 
-        return (UserDetails) new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), Arrays.asList(authority));
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), Arrays.asList(authority));
     }
 }

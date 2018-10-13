@@ -1,4 +1,4 @@
-package com.bootiful.web.config;
+package com.bootiful.web.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,16 +21,16 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web
-            .ignoring()
-            .antMatchers("/dist/**");
+                .ignoring()
+                .antMatchers("/dist/**");
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-            .csrf()
-                .and()
-            .formLogin()
+                .csrf()
+                .disable()
+                .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/doLogin")
                 .usernameParameter("email")
@@ -38,22 +38,17 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login?error")
                 .permitAll()
                 .and()
-            .logout()
-        //        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID", "XSRF-TOKEN")
                 .permitAll()
                 .and()
-            .headers()
-                .frameOptions()
-                .disable()
-                .and()
-            .authorizeRequests()
-                .antMatchers("/", "/login", "/logout").permitAll()
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .antMatchers("/protected/**").authenticated();
+                .authorizeRequests()
+                .antMatchers("/**").authenticated();
+
     }
 
     @Override
@@ -62,7 +57,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

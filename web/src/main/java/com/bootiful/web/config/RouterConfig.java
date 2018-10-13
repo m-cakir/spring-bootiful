@@ -13,7 +13,7 @@ public class RouterConfig extends RouterConfigurationSupport {
     public List<String> listRouteFiles() {
 
         List<String> routeFiles = new ArrayList();
-        routeFiles.add("classpath://routes.conf");
+        routeFiles.add("classpath:routes.conf");
 
         return routeFiles;
     }

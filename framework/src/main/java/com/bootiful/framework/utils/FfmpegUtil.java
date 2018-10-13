@@ -8,20 +8,20 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 /*
-* uses
-*
-* "ffmpeg" via system path
-*
-* "file" unix command
-*
-* */
+ * uses
+ *
+ * "ffmpeg" via system path
+ *
+ * "file" unix command
+ *
+ * */
 public class FfmpegUtil {
 
     protected static final Log LOG = LogFactory.getLog(FfmpegUtil.class);
 
     public static Response mixUp(String inputFilePath, String bipFilePath, String outputFilePath,
                                  int maxDuration, int bipSoundModSeconds, int fadeOutLastSeconds,
-                                int outputBitrate) {
+                                 int outputBitrate) {
 
 //        ffmpeg
 //        -loglevel error
@@ -35,17 +35,17 @@ public class FfmpegUtil {
 //        -map "[out]" -map_metadata:s:a 0:s:a
 //        -ab 196k output.mp3
 
-        if(StringUtil.isNothing(inputFilePath)
-                || StringUtil.isNothing(bipFilePath)
-                || StringUtil.isNothing(outputFilePath)
-                || bipSoundModSeconds == 0){
+        if (!StringUtils.hasText(inputFilePath)
+                || !StringUtils.hasText(bipFilePath)
+                || !StringUtils.hasText(outputFilePath)
+                || bipSoundModSeconds == 0) {
 
             return new Response("Invalid parameter");
 
         }
 
         int duration = getDuration(inputFilePath);
-        if(duration == 0 || duration > maxDuration){
+        if (duration == 0 || duration > maxDuration) {
 
             return new Response("Duration is invalid > duration: " + duration);
 
@@ -56,7 +56,7 @@ public class FfmpegUtil {
         int divider = (int) Math.floor(duration / delay);
         String adelays = "";
         String amixes = "";
-        for(int i = 1; i < divider; i++){
+        for (int i = 1; i < divider; i++) {
             int adelay = i * delay * 1000;
             adelays += "[1]adelay=" + adelay + "|" + adelay + "[a" + i + "];";
             amixes += "[a" + i + "]";
@@ -93,7 +93,7 @@ public class FfmpegUtil {
                 : 0;
     }
 
-    public static String getMimeType(String filePath){
+    public static String getMimeType(String filePath) {
 
         // file -b --mime-type demo.mp3
 
@@ -109,10 +109,10 @@ public class FfmpegUtil {
                 : null;
     }
 
-    public static boolean isAudio(String filePath){
+    public static boolean isAudio(String filePath) {
 
         String mimeType = getMimeType(filePath);
-        if(StringUtil.isNothing(mimeType))
+        if (!StringUtils.hasText(mimeType))
             return false;
 
         return mimeType.startsWith("audio");
@@ -124,10 +124,10 @@ public class FfmpegUtil {
 
         private boolean ok;
 
-        public Response(){
+        public Response() {
         }
 
-        public Response(String output){
+        public Response(String output) {
             this.output = output;
         }
 
@@ -148,7 +148,7 @@ public class FfmpegUtil {
         }
     }
 
-    public static Response cmd(String command){
+    public static Response cmd(String command) {
 
         LOG.trace(command);
 
@@ -172,7 +172,7 @@ public class FfmpegUtil {
             response.setOk(proc.exitValue() == 0);
             response.setOutput(proc.exitValue() == 0 ? output : error);
 
-        } catch (Exception e){
+        } catch (Exception e) {
 
             response.setOk(false);
             response.setOutput(e.getMessage());
@@ -182,7 +182,7 @@ public class FfmpegUtil {
         return response;
     }
 
-    public static Response cmd(String[] command){
+    public static Response cmd(String[] command) {
 
         return cmd(StringUtils.arrayToDelimitedString(command, ""));
     }
